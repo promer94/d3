@@ -1,36 +1,42 @@
-const data = [100, 250, 175, 200, 120]
-const height = 300
+/* global d3 */
+const data = [100, 500, 175, 250, 120]
 const rectWidth = 30
 /** get min/max */
-const [min, max] = d3.extent(data) //eslint-disable-line
+const [_, max] = d3.extent(data) //eslint-disable-line
 
+const margin = { top: 20, bottom: 20, left: 30, right: 30 }
+const width = margin.left + margin.right + data.length * rectWidth
+const height = d3.max(data)
 /** Scale */
-const yScale = d3 //eslint-disable-line
+
+const yScale = d3
   .scaleLinear()
-  .domain([min, max])
-  .range([height, 0])
+  .domain([0, max])
+  .range([height - margin.bottom, margin.top])
 
+const heightScale = d3
+  .scaleLinear()
+  .domain([0, max])
+  .range([0, height - margin.bottom - margin.top])
 /** Axes */
-const yAxis = d3.axisLeft().scale(yScale) //eslint-disable-line
+const yAxis = d3.axisLeft().scale(yScale)
 
-const a = d3 //eslint-disable-line
-  .select('#graph')
-  .append('g') //eslint-disable-line
-  .attr('transform', 'translate(40,20)')
+d3.select('#graph')
+  .append('g')
+  .attr('transform', `translate(${margin.left})`)
   .call(yAxis)
 
-const graph = d3 // eslint-disable-line
-  .select('#graph')
-  .attr('width', rectWidth * data.length)
-  .attr('height', 500) // eslint-disable-line
-/* .selectAll('rect')
+d3.select('#graph')
+  .attr('width', width)
+  .attr('height', 500)
+  .selectAll('rect')
   .data(data) // bind the data to the element
   .enter() // Create placeholder
   .append('rect') // create rect element
-  .attr('x', (d, i) => i * rectWidth)
-  .attr('y', d => height - d)
+  .attr('x', (d, i) => margin.left + i * rectWidth)
+  .attr('y', d => yScale(d))
   .attr('width', rectWidth)
-  .attr('height', d => d)
+  .attr('height', d => heightScale(d))
   .attr('fill', d => (d === 250 ? 'red' : 'blue'))
   .attr('stroke', '#fff')
-  .on('click', d => (document.getElementById('number').innerText = d)) */
+  .on('mouseover', d => (document.getElementById('number').innerText = d))

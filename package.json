@@ -4,7 +4,8 @@
   "description": "learn d3",
   "main": "index.js",
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "start":"parcel exercise/index.html"
   },
   "author": "",
   "license": "MIT",
@@ -22,6 +23,7 @@
     "standard": "^12.0.1"
   },
   "dependencies": {
-    "d3": "^5.7.0"
+    "d3": "^5.7.0",
+    "parcel-bundler": "^1.10.3"
   }
 }
