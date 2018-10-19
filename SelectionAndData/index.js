@@ -1,10 +1,10 @@
 /* global d3 */
-const data = [100, 500, 175, 250, 120]
+const data = [100, 300, 175, 250, 120]
 const rectWidth = 30
 /** get min/max */
 const [_, max] = d3.extent(data) //eslint-disable-line
 
-const margin = { top: 20, bottom: 20, left: 30, right: 30 }
+const margin = { top: 30, bottom: 30, left: 30, right: 30 }
 const width = margin.left + margin.right + data.length * rectWidth
 const height = d3.max(data)
 /** Scale */
@@ -43,4 +43,3 @@ bar
   .attr('height', d => heightScale(d))
   .attr('fill', d => (d === 250 ? 'red' : 'blue'))
   .attr('stroke', '#fff')
-  .on('mouseover', d => (document.getElementById('number').innerText = d))
