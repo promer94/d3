@@ -20,19 +20,23 @@ const heightScale = d3
   .range([0, height - margin.bottom - margin.top])
 /** Axes */
 const yAxis = d3.axisLeft().scale(yScale)
-
 d3.select('#graph')
   .append('g')
   .attr('transform', `translate(${margin.left})`)
   .call(yAxis)
 
-d3.select('#graph')
+const graph = d3
+  .select('#graph')
   .attr('width', width)
   .attr('height', 500)
+const bar = graph
   .selectAll('rect')
   .data(data) // bind the data to the element
   .enter() // Create placeholder
-  .append('rect') // create rect element
+  .append('rect')
+
+// create rect element
+bar
   .attr('x', (d, i) => margin.left + i * rectWidth)
   .attr('y', d => yScale(d))
   .attr('width', rectWidth)

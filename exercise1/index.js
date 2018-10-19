@@ -70,6 +70,10 @@ const draw = city => {
       .append('g')
       .attr('transform', `translate(${margin.left})`)
       .call(yAxis)
+
+    d3.select('svg')
+      .attr('width', width)
+      .attr('height', height)
   })
 }
 draw(city)
