@@ -23,7 +23,12 @@ function updateBars(data) {
   const yAxis = d3.axisLeft().scale(yScale)
 
   svg.selectAll('g').remove()
-  bars.exit().remove()
+  bars
+    .exit()
+    .transition(t)
+    .attr('y', 360)
+    .attr('height', 0)
+    .remove()
 
   d3.select('svg')
     .append('g')
