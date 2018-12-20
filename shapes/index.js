@@ -78,7 +78,6 @@ d3.tsv('data.tsv').then(data => {
     .startAngle(d => d.startAngle)
     .endAngle(d => d.endAngle)
     .padAngle(d => 0.04)
-
   const graph = d3
     .select('#svg2')
     .attr('width', width)
